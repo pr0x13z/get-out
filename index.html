@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Search Terminal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+  body {
+    margin: 0;
+    background: black;
+    color: #00ff99;
+    font-family: "Courier New", monospace;
+  }
+
+  header {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #00ff99;
+    box-shadow: 0 0 10px #00ff99;
+  }
+
+  input {
+    width: 70%;
+    max-width: 400px;
+    padding: 12px;
+    background: black;
+    border: 1px solid #00ff99;
+    color: #00ff99;
+    outline: none;
+  }
+
+  button {
+    padding: 12px 18px;
+    background: black;
+    color: #00ff99;
+    border: 1px solid #00ff99;
+    cursor: pointer;
+    margin-left: 5px;
+  }
+
+  button:hover {
+    background: #00ff99;
+    color: black;
+  }
+
+  iframe {
+    width: 100%;
+    height: calc(100vh - 110px);
+    border: none;
+    background: black;
+  }
+
+  .status {
+    font-size: 12px;
+    margin-top: 10px;
+    opacity: 0.8;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h2>> SECURE SEARCH TERMINAL</h2>
+
+  <form onsubmit="searchDDG(); return false;">
+    <input id="query" placeholder="ENTER QUERY..." required>
+    <button type="submit">EXECUTE</button>
+  </form>
+
+  <div class="status" id="status">[ READY ]</div>
+</header>
+
+<iframe id="results"></iframe>
+
+<script>
+  function searchDDG() {
+    const q = document.getElementById("query").value;
+    const iframe = document.getElementById("results");
+    const status = document.getElementById("status");
+
+    status.textContent = "[ ENCRYPTING QUERY ]";
+
+    setTimeout(() => {
+      status.textContent = "[ LOADING RESULTS ]";
+      iframe.src =
+        "https://html.duckduckgo.com/html/?q=" +
+        encodeURIComponent(q);
+    }, 600);
+  }
+</script>
+
+</body>
+</html>
